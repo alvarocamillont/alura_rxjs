@@ -62,17 +62,84 @@ CREATE TABLE IF NOT EXISTS stock (
 )
 `;
 
+const INSERT_STOCK_1 = `
+INSERT INTO stock (
+    stock_code, 
+    stock_description,
+    stock_price
+) SELECT 'ALUR3', 'Alura ON', 25.10 WHERE NOT EXISTS (SELECT * FROM stock WHERE stock_code = 'ALUR3')
+`;
+
+const INSERT_STOCK_2 = `
+INSERT INTO stock (
+    stock_code, 
+    stock_description,
+    stock_price
+) SELECT 'ALUR4', 'Alura PN', 25.10 WHERE NOT EXISTS (SELECT * FROM stock WHERE stock_code = 'ALUR4')
+`;
+
+const INSERT_STOCK_3 = `
+INSERT INTO stock (
+    stock_code, 
+    stock_description,
+    stock_price
+) SELECT 'CAEL3', 'Caellum ON', 25.10 WHERE NOT EXISTS (SELECT * FROM stock WHERE stock_code = 'CAEL3')
+`;
+
+const INSERT_STOCK_4 = `
+INSERT INTO stock (
+    stock_code, 
+    stock_description,
+    stock_price
+) SELECT 'CASC3', 'Casa do codigo ON', 25.10 WHERE NOT EXISTS (SELECT * FROM stock WHERE stock_code = 'CASC3')
+`;
+
+const INSERT_STOCK_5 = `
+INSERT INTO stock (
+    stock_code, 
+    stock_description,
+    stock_price
+) SELECT 'JAVA3', 'JAVA ON', 25.10 WHERE NOT EXISTS (SELECT * FROM stock WHERE stock_code = 'JAVA3')
+`;
+
+const INSERT_STOCK_6 = `
+INSERT INTO stock (
+    stock_code, 
+    stock_description,
+    stock_price
+) SELECT 'PHPP3', 'PHP ON', 25.10 WHERE NOT EXISTS (SELECT * FROM stock WHERE stock_code = 'PHPP3')
+`;
+
+const INSERT_STOCK_7 = `
+INSERT INTO stock (
+    stock_code, 
+    stock_description,
+    stock_price
+) SELECT 'NETC3', 'Net Core ON', 25.10 WHERE NOT EXISTS (SELECT * FROM stock WHERE stock_code = 'NETC3')
+`;
+
 db.serialize(() => {
   db.run("PRAGMA foreign_keys=ON");
   db.run(USER_SCHEMA);
   db.run(INSERT_DEFAULT_USER_1);
   db.run(INSERT_DEFAULT_USER_2);
   db.run(STOCK_SCHEMA);
+  db.run(INSERT_STOCK_1);
+  db.run(INSERT_STOCK_2);
+  db.run(INSERT_STOCK_3);
+  db.run(INSERT_STOCK_4);
+  db.run(INSERT_STOCK_5);
+  db.run(INSERT_STOCK_6);
+  db.run(INSERT_STOCK_7);
   db.run(PORTFOLIO_SCHEMA);
   db.run(PORTFOLIO_ITEM_SCHEMA);
 
   db.each("SELECT * FROM user", (err, user) => {
     console.log("Users");
+    console.log(user);
+  });
+  db.each("SELECT * FROM stock", (err, user) => {
+    console.log("Stocks");
     console.log(user);
   });
 });

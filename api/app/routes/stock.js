@@ -1,7 +1,10 @@
 const { stockAPI } = require("../api");
 
-const { wrapAsync } = require("../infra");
+const { wrapAsync, auth } = require("../infra");
 
 module.exports = (app) => {
-  app.route("/stock").get(wrapAsync(stockAPI.list));
+  app
+    .route("/stock")
+    .get(wrapAsync(stockAPI.list))
+    .post(auth, wrapAsync(stockAPI.add));
 };

@@ -3,14 +3,13 @@ const { StockDao } = require("../infra");
 const api = {};
 
 api.add = async (req, res) => {
-  const { id } = req.params;
   const { code, description, price } = req.body;
-
+  console.log(req.body);
   const stockDao = new StockDao(req.db);
 
   const stockid = await stockDao.add(code, description, price);
   const stock = await stockDao.findById(stockid);
-  console.log(`Stock added`, comment);
+  console.log(`Stock added`, stock);
   res.json(stock);
 };
 

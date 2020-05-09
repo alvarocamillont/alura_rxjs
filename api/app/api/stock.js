@@ -21,4 +21,16 @@ api.list = async (req, res) => {
   res.json(stocks);
 };
 
+api.findById = async (req, res) => {
+  const { stockID } = req.params;
+  console.log("####################################");
+  console.log(`Finding stock for ID ${stockID}`);
+  const stock = await new StockDao(req.db).findById(stockID);
+  if (stock) {
+    res.json(stock);
+  } else {
+    res.status(404).json({ message: "Stock does not exist" });
+  }
+};
+
 module.exports = api;

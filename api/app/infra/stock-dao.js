@@ -1,8 +1,10 @@
+const jwt = require("jsonwebtoken"),
+  { promisify } = require("util");
 const stockConverter = (row) => ({
   id: row.stock_id,
   code: row.stock_code,
   description: row.stock_description,
-  price: row.stock_price,
+  price: parseFloat((Math.random() * (100 - 1) + 1).toFixed(2)),
 });
 
 class StockDao {

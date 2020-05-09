@@ -7,4 +7,8 @@ module.exports = (app) => {
     .route("/stock")
     .get(wrapAsync(stockAPI.list))
     .post(auth, wrapAsync(stockAPI.add));
+  
+  app
+    .route("/stock/:stockID")
+    .get(wrapAsync(stockAPI.findById));
 };

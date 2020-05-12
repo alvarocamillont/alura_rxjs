@@ -1,5 +1,4 @@
-const jwt = require("jsonwebtoken"),
-  { promisify } = require("util");
+
 const stockConverter = (row) => ({
   id: row.stock_id,
   code: row.stock_code,

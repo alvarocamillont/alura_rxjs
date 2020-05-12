@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 stockRoutes(app);
-//portfolioRoutes(app);
+portfolioRoutes(app);
 userRoutes(app);
 
 app.use("*", (req, res) => {

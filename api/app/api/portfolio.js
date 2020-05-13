@@ -2,7 +2,7 @@ const { PortfolioDao, UserDao } = require("../infra");
 
 const api = {};
 
-const userCanDelete = (user) => (portfolio) => portfolio.userId == user.id;
+const userCanDelete = (user) => (portfolio) => portfolio.user_id == user.id;
 
 api.add = async (req, res) => {
   console.log("####################################");
@@ -49,30 +49,30 @@ api.put = async (req, res) => {
   res.json(id);
 };
 
-/*
 api.remove = async (req, res) => {
-    const user = req.user;
-    const { portfolioId } = req.params;
-    const dao = new PortfolioDao(req.db);
-    const portfolio = await dao.findById(portfolioId);
-    if (!portfolio) {
-        const message = 'PortfolioId does not exist';
-        console.log(message);
-        return res.status(404).json({ message });
-    }
-    
-    if(userCanDelete(user)(portfolio)) {
-        await dao.remove(portfolioId)
-        console.log(`Photo ${portfolioId} deleted!`);
-        res.status(200).end();
-    } else {
-        console.log(`
+  const user = req.user;
+  const { portfolioId } = req.params;
+  console.log("####################################");
+  console.log(`Remove PortFolio for ID ${portfolioId} of user ${user.id}`);
+  const dao = new PortfolioDao(req.db);
+  const portfolio = await dao.findById(user.id, portfolioId);
+  if (!portfolio) {
+    const message = "PortfolioId does not exist";
+    console.log(message);
+    return res.status(404).json({ message });
+  }
+
+  if (userCanDelete(user)(portfolio)) {
+    await dao.remove(portfolioId);
+    console.log(`Portfolio ${portfolioId} deleted!`);
+    res.status(200).end();
+  } else {
+    console.log(`
             Forbiden operation. User ${user.id} 
-            can delete photo from user ${portfolio.userId}
+            can delete portfolio from user ${portfolio.user_id}
         `);
-        res.status(403).json({ message: 'Forbidden'});
-    }
+    res.status(403).json({ message: "Forbidden" });
+  }
 };
-*/
 
 module.exports = api;

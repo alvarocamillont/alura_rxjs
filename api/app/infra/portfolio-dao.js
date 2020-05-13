@@ -23,6 +23,12 @@ class PortfolioDao {
     }
   }
 
+  remove(portfolio_id) {
+    const deleteItems = this.deleteAllItems(portfolio_id);
+    const deletePortFolio = this.deletePortfolio(portfolio_id);
+    return Promise.all([deleteItems, deletePortFolio]);
+  }
+
   updateModel(portfolio_id, header, items) {
     const { portfolio_description } = header;
     const self = this;
@@ -136,6 +142,24 @@ class PortfolioDao {
     });
   }
 
+  deletePortfolio(portfolio_id) {
+    return new Promise((resolve, reject) => {
+      this._db.run(
+        `
+        DELETE FROM portfolio where portfolio_id = ?;
+      `,
+        [portfolio_id],
+        (err) => {
+          if (err) {
+            console.log(err);
+            return reject("Can`t delete portfolio");
+          }
+          resolve();
+        }
+      );
+    });
+  }
+
   listAllFromUser(user_id) {
     return new Promise((resolve, reject) => {
       this._db.all(
@@ -190,17 +214,20 @@ class PortfolioDao {
             return reject("Can`t load portfolio");
           }
           const [first] = rows;
-          const header = {
-            portfolio_id,
-            portfolio_description: first.portfolio_description,
-            user_id,
-          };
-          const items = rows.map((row) => ({
-            item_quantity: row.item_quantity,
-            item_price: row.item_price,
-            stock_id: row.stock_id,
-          }));
-          return resolve({ ...header, items });
+          if (first) {
+            const header = {
+              portfolio_id,
+              portfolio_description: first.portfolio_description,
+              user_id,
+            };
+            const items = rows.map((row) => ({
+              item_quantity: row.item_quantity,
+              item_price: row.item_price,
+              stock_id: row.stock_id,
+            }));
+            return resolve({ ...header, items });
+          }
+          return resolve({});
         }
       );
     });

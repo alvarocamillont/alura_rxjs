@@ -54,8 +54,8 @@ class StockDao {
             console.log(err);
             return reject("Can`t load stock");
           }
-          const comments = rows.map(stockConverter);
-          return resolve(comments);
+          const stocks = rows.map(stockConverter);
+          return resolve(stocks);
         }
       );
     });

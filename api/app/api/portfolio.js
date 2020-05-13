@@ -1,35 +1,27 @@
-const { PortfolioDao, UserDao } = require('../infra')
+const { PortfolioDao, UserDao } = require("../infra");
 
-const api = {}
+const api = {};
 
-const userCanDelete = user => portfolio => portfolio.userId == user.id;
+const userCanDelete = (user) => (portfolio) => portfolio.userId == user.id;
 
 api.add = async (req, res) => {
-    console.log('####################################');
-    console.log('Received JSON data', req.body);
-    const portfolio = req.body;
-    const id = await new PortfolioDao(req.db).add(portfolio, req.user.id);
-    res.json(id);
+  console.log("####################################");
+  console.log("Received JSON data", req.body);
+  const portfolio = req.body;
+  const id = await new PortfolioDao(req.db).add(portfolio, req.user.id);
+  res.json(id);
+};
+
+api.list = async (req, res) => {
+  console.log("####################################");
+  console.log(`Listing portfolios`);
+  const portfolios = await new PortfolioDao(req.db).listAllFromUser(
+    req.user.id
+  );
+  res.json(portfolios);
 };
 
 /*
-
-api.list = async (req, res) => {
-    console.log('####################################');
-    const { userName } = req.params;
-    const { page } = req.query;
-    const user = await new UserDao(req.db).findByName(userName);
-    if(user) {
-        console.log(`Listing portfolios`);
-        const portfolios = await new PortfolioDao(req.db)
-            .listAllFromUser(userName, page);
-        res.json(portfolios);
-    } else {
-        res.status(404).json({ message: 'User not found'});
-    }
-    
-}
-
 
 api.findById = async (req, res) => {
     const { portfolioId } = req.params;

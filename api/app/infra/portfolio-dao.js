@@ -134,6 +134,31 @@ class PortfolioDao {
       );
     });
   }
+
+  listAllFromUser(user_id) {
+    return new Promise((resolve, reject) => {
+      this._db.all(
+        `
+          SELECT
+            portfolio_id,
+            portfolio_description,
+            user_id 
+          FROM portfolio
+          WHERE 
+            user_id = ?
+        `,
+        [user_id],
+        (err, rows) => {
+          if (err) {
+            console.log("++++ERRO+++");
+            console.log(err);
+            return reject("Can`t load portfolio");
+          }
+          return resolve(rows);
+        }
+      );
+    });
+  }
 }
 
 module.exports = PortfolioDao;

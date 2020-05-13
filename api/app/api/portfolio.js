@@ -36,6 +36,19 @@ api.findById = async (req, res) => {
   }
 };
 
+api.put = async (req, res) => {
+  console.log("####################################");
+  console.log("Received JSON data", req.body);
+  const { portfolioId } = req.params;
+  const portfolio = req.body;
+  const id = await new PortfolioDao(req.db).add(
+    portfolio,
+    req.user.id,
+    portfolioId
+  );
+  res.json(id);
+};
+
 /*
 api.remove = async (req, res) => {
     const user = req.user;

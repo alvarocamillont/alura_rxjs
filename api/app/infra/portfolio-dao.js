@@ -12,11 +12,12 @@ class PortfolioDao {
     this._db = db;
   }
 
-  add(model, user_id) {
+  add(model, user_id, portfolio_id) {
     const header = portFolioHeader(model, user_id);
     const { items } = model;
-    if (header.portfolio_id) {
-      return this.updateModel(header.portfolio_id, header, items);
+    const id = portfolio_id || header.portfolio_id;
+    if (id) {
+      return this.updateModel(id, header, items);
     } else {
       return this.insertModel(header, items);
     }
@@ -195,7 +196,6 @@ class PortfolioDao {
             user_id,
           };
           const items = rows.map((row) => ({
-            item_id: row.item_id,
             item_quantity: row.item_quantity,
             item_price: row.item_price,
             stock_id: row.stock_id,

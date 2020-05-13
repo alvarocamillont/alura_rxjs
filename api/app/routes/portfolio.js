@@ -10,7 +10,7 @@ module.exports = (app) => {
 
   app
     .route("/portfolios/:portfolioId")
-    //.put(auth, wrapAsync(portfolioAPI.put))
+    .put(auth, wrapAsync(portfolioAPI.put))
     //.delete(auth, wrapAsync(portfolioAPI.remove))
     .get(auth, wrapAsync(portfolioAPI.findById));
 };

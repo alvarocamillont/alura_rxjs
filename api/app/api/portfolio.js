@@ -21,20 +21,22 @@ api.list = async (req, res) => {
   res.json(portfolios);
 };
 
-/*
-
 api.findById = async (req, res) => {
-    const { portfolioId } = req.params;
-    console.log('####################################');
-    console.log(`Finding PortFolio for ID ${portfolioId}`)
-    const portfolio = await new PortfolioDao(req.db).findById(portfolioId);
-    if (portfolio) {
-        res.json(portfolio);
-    } else {
-        res.status(404).json({ message: 'Portfolio does not exist'})
-    }  
+  const { portfolioId } = req.params;
+  console.log("####################################");
+  console.log(`Finding PortFolio for ID ${portfolioId}`);
+  const portfolio = await new PortfolioDao(req.db).findById(
+    req.user.id,
+    portfolioId
+  );
+  if (portfolio) {
+    res.json(portfolio);
+  } else {
+    res.status(404).json({ message: "Portfolio does not exist" });
+  }
 };
 
+/*
 api.remove = async (req, res) => {
     const user = req.user;
     const { portfolioId } = req.params;

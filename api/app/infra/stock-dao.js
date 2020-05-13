@@ -1,4 +1,3 @@
-
 const stockConverter = (row) => ({
   id: row.stock_id,
   code: row.stock_code,

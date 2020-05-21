@@ -1,1 +1,22 @@
-<po-page-default p-title="Ações" ></po-page-default>
+<po-page-default p-title="Ações">
+  <div class="po-row">
+    <div class="po-xl-6 po-lg-6 po-md-6 po-sm-6">
+      <po-input> </po-input>
+    </div>
+  </div>
+  <div
+    class="td-page-wrapper"
+    *ngIf="stocks$ | async as stocks; else elseBlock"
+  >
+    <div class="po-row">
+      <div
+        class="po-xl-3 po-lg-3 po-md-6 po-sm-12"
+        *ngFor="let stock of stocks"
+      >
+        <app-stock-card [stock]="stock" (selectAction)="select(stock)">
+        </app-stock-card>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock><app-no-data></app-no-data></ng-template>
+</po-page-default>

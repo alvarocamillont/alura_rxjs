@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         link: '/home/stocks',
       },
       {
-        label: 'Home',
+        label: 'Portfolio',
         link: '/home/portfolio',
       },
     ];

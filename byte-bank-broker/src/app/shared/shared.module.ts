@@ -4,6 +4,7 @@ import { PoModule } from '@po-ui/ng-components';
 import { MessagesModule } from '../messages/messages.module';
 import { NoDataModule } from '../no-data/no-data.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthorizationModule } from '../authorization/authorization.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     MessagesModule,
     NoDataModule,
     ReactiveFormsModule,
+    AuthorizationModule,
   ],
-  exports: [PoModule, MessagesModule, NoDataModule, ReactiveFormsModule],
+  exports: [
+    PoModule,
+    MessagesModule,
+    NoDataModule,
+    ReactiveFormsModule,
+    AuthorizationModule,
+  ],
 })
 export class SharedModule {}

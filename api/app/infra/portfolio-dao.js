@@ -94,9 +94,9 @@ class PortfolioDao {
 
   saveItems(portfolio_id, items) {
     const deletePromise = this.deleteAllItems(portfolio_id);
-    const itemsPromise = items.map((item) =>
-      this.insertItem(portfolio_id, item)
-    );
+    const itemsPromise = items
+      ? items.map((item) => this.insertItem(portfolio_id, item))
+      : [Promise.resolve()];
     return Promise.all([deletePromise, ...itemsPromise]);
   }
 
@@ -133,6 +133,7 @@ class PortfolioDao {
         [portfolio_id],
         (err) => {
           if (err) {
+            console.log("Delete item");
             console.log(err);
             return reject("Can`t add portfolio");
           }
@@ -151,6 +152,7 @@ class PortfolioDao {
         [portfolio_id],
         (err) => {
           if (err) {
+            console.log("Delete header");
             console.log(err);
             return reject("Can`t delete portfolio");
           }
@@ -198,7 +200,7 @@ class PortfolioDao {
             item_price,
             stock_id
           FROM portfolio 
-          INNER JOIN portfolio_item  ON
+          LEFT JOIN portfolio_item  ON
             portfolio.portfolio_id = portfolio_item.portfolio_id
           WHERE 
             user_id = ? AND

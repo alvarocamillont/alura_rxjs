@@ -11,8 +11,8 @@ export class PortfolioListComponent {
   public readonly serviceApi = 'http://localhost:3000/portfolios';
 
   public readonly actions: PoPageDynamicTableActions = {
-    new: '/portfolio/new',
-    detail: '/portfolio/detail/:id',
+    new: '/home/portfolio/new',
+    detail: '/home/portfolio/detail/:id',
     remove: true,
   };
 

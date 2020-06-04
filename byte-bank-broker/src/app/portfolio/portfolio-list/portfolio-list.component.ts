@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PoPageDynamicTableActions } from '@po-ui/ng-templates';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 
 @Component({
-  selector: 'app-portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.css'],
+  selector: 'app-portfolio-list',
+  templateUrl: './portfolio-list.component.html',
+  styleUrls: ['./portfolio-list.component.css'],
 })
-export class PortfolioComponent {
+export class PortfolioListComponent {
   public readonly serviceApi = 'http://localhost:3000/portfolios';
 
   public readonly actions: PoPageDynamicTableActions = {

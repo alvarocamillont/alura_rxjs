@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PortfolioComponent } from './portfolio.component';
-
+import { PortfolioListComponent } from './portfolio-list/portfolio-list.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: PortfolioComponent,
+    component: PortfolioListComponent,
   },
 ];
 

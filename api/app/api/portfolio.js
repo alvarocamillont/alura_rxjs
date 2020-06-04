@@ -18,7 +18,11 @@ api.list = async (req, res) => {
   const portfolios = await new PortfolioDao(req.db).listAllFromUser(
     req.user.id
   );
-  res.json(portfolios);
+  const result = {
+    items: [...portfolios],
+    hasNext: false,
+  };
+  res.json(result);
 };
 
 api.findById = async (req, res) => {

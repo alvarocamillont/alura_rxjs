@@ -93,11 +93,10 @@ class PortfolioDao {
   }
 
   saveItems(portfolio_id, items) {
-    const deletePromise = this.deleteAllItems(portfolio_id);
     const itemsPromise = items
       ? items.map((item) => this.insertItem(portfolio_id, item))
       : [Promise.resolve()];
-    return Promise.all([deletePromise, ...itemsPromise]);
+    return Promise.all([...itemsPromise]);
   }
 
   insertItem(portfolio_id, item) {

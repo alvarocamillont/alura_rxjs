@@ -50,7 +50,13 @@ api.put = async (req, res) => {
     req.user.id,
     portfolioId
   );
-  res.json(id);
+
+  const portfolioRet = await new PortfolioDao(req.db).findById(req.user.id, id);
+  if (portfolioRet) {
+    res.json(portfolioRet);
+  } else {
+    res.status(404).json({ message: "Portfolio does not exist" });
+  }
 };
 
 api.remove = async (req, res) => {

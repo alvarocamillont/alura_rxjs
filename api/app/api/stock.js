@@ -18,7 +18,8 @@ api.list = async (req, res) => {
   value = value || "";
   console.log(`Get stock by ${value}`);
   const stocks = await new StockDao(req.db).listAll(value);
-  res.json(stocks);
+  const result = { payload: stocks };
+  res.json(result);
 };
 
 api.findById = async (req, res) => {

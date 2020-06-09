@@ -3,7 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   cors = require("cors"),
   db = require("./database"),
-  { stockRoutes, portfolioRoutes, userRoutes } = require("../app/routes");
+  { acoesRoutes, portfolioRoutes, userRoutes } = require("../app/routes");
 
 app.set("secret", "your secret phrase here");
 
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-stockRoutes(app);
+acoesRoutes(app);
 portfolioRoutes(app);
 userRoutes(app);
 

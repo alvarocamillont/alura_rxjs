@@ -23,7 +23,7 @@ export class PortfolioListComponent {
   public readonly fields: Array<any> = [
     { property: 'portfolio_id', key: true },
     {
-      property: 'portfolio_description',
+      property: 'portfolio_descricao',
       label: 'Descrição',
       filter: true,
       gridColumns: 6,

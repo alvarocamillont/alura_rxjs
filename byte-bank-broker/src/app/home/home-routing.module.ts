@@ -8,9 +8,9 @@ export const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: 'stocks',
+        path: 'acoes',
         loadChildren: () =>
-          import('../stock/stock.module').then((m) => m.StockModule),
+          import('../acoes/acoes.module').then((m) => m.AcoesModule),
       },
       {
         path: 'portfolio',
@@ -21,12 +21,12 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'stocks',
+        redirectTo: 'acoes',
         pathMatch: 'full',
       },
       {
         path: '**',
-        redirectTo: 'stocks',
+        redirectTo: 'acoes',
       },
     ],
   },

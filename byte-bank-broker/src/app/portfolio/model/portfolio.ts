@@ -1,12 +1,12 @@
 interface PortFolio {
   portfolio_id: string;
-  portfolio_description: string;
+  portfolio_descricao: string;
   user_id: number;
   items: Array<PortFolioItem>;
 }
 
 interface PortFolioItem {
-  item_quantity: number;
-  item_price: number;
-  stock_id: number;
+  item_quantidade: number;
+  item_preco: number;
+  acoes_id: number;
 }

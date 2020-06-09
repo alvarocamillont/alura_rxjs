@@ -23,7 +23,7 @@ export class PortfolioFormComponent implements OnInit {
     { property: 'portfolio_id', key: true, visible: false },
     {
       label: 'Descrição',
-      property: 'portfolio_description',
+      property: 'portfolio_descricao',
     },
   ];
 

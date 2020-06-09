@@ -6,3 +6,7 @@ export interface Stock {
 }
 
 export interface Stocks extends Array<Stock> {}
+
+export interface StockAPI {
+  payload: Stocks;
+}

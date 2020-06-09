@@ -1,8 +1,8 @@
 const portFolioHeader = (model, user_id) => {
-  const { portfolio_id, portfolio_description } = model;
+  const { portfolio_id, portfolio_descricao } = model;
   return {
     portfolio_id,
-    portfolio_description,
+    portfolio_descricao,
     user_id,
   };
 };
@@ -30,17 +30,17 @@ class PortfolioDao {
   }
 
   updateModel(portfolio_id, header, items) {
-    const { portfolio_description } = header;
+    const { portfolio_descricao } = header;
     const self = this;
     return new Promise((resolve, reject) => {
       this._db.run(
         `
           UPDATE portfolio
-              SET portfolio_description = ?
+              SET portfolio_descricao = ?
           WHERE
               portfolio_id = ?
         `,
-        [portfolio_description, portfolio_id],
+        [portfolio_descricao, portfolio_id],
         function (err) {
           if (err) {
             console.log(err);
@@ -61,18 +61,18 @@ class PortfolioDao {
   }
 
   insertModel(header, items) {
-    const { portfolio_description, user_id } = header;
+    const { portfolio_descricao, user_id } = header;
     const self = this;
     return new Promise((resolve, reject) => {
       this._db.run(
         `
                 INSERT INTO portfolio (
-                    portfolio_description, 
+                    portfolio_descricao, 
                     user_id,
                     portfolio_create_date
                     ) values (?,?,?)
                 `,
-        [portfolio_description, user_id, new Date()],
+        [portfolio_descricao, user_id, new Date()],
         function (err) {
           if (err) {
             console.log(err);
@@ -100,18 +100,18 @@ class PortfolioDao {
   }
 
   insertItem(portfolio_id, item) {
-    const { stock_id, item_quantity, item_price } = item;
+    const { acoes_id, item_quantidade, item_preco } = item;
     return new Promise((resolve, reject) => {
       this._db.run(
         `
         INSERT INTO portfolio_item (
           portfolio_id,
-          stock_id,	
-          item_quantity,
-          item_price
+          acoes_id,	
+          item_quantidade,
+          item_preco
         ) values (?,?,?,?)
       `,
-        [portfolio_id, stock_id, item_quantity, item_price],
+        [portfolio_id, acoes_id, item_quantidade, item_preco],
         (err) => {
           if (err) {
             console.log(err);
@@ -167,7 +167,7 @@ class PortfolioDao {
         `
           SELECT
             portfolio_id,
-            portfolio_description,
+            portfolio_descricao,
             user_id 
           FROM portfolio
           WHERE 
@@ -192,12 +192,12 @@ class PortfolioDao {
         `
           SELECT
             portfolio.portfolio_id,
-            portfolio_description,
+            portfolio_descricao,
             user_id,
             item_id,
-            item_quantity,
-            item_price,
-            stock_id
+            item_quantidade,
+            item_preco,
+            acoes_id
           FROM portfolio 
           LEFT JOIN portfolio_item  ON
             portfolio.portfolio_id = portfolio_item.portfolio_id
@@ -218,13 +218,13 @@ class PortfolioDao {
           if (first) {
             const header = {
               portfolio_id,
-              portfolio_description: first.portfolio_description,
+              portfolio_descricao: first.portfolio_descricao,
               user_id,
             };
             const items = rows.map((row) => ({
-              item_quantity: row.item_quantity,
-              item_price: row.item_price,
-              stock_id: row.stock_id,
+              item_quantidade: row.item_quantidade,
+              item_preco: row.item_preco,
+              acoes_id: row.acoes_id,
             }));
             return resolve({ ...header, items });
           }

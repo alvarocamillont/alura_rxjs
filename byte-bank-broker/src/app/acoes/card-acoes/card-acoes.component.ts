@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewEncapsulation,
-} from '@angular/core';
-import { Acao } from '../model/acoes';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-card-acoes',
@@ -13,10 +7,9 @@ import { Acao } from '../model/acoes';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardAcoesComponent implements OnInit {
-  @Input() acao: Acao;
+  @Input() acao: any;
 
   constructor() {}
 
   ngOnInit(): void {}
-
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './home.component';
 
 export const routes: Routes = [
@@ -11,13 +12,6 @@ export const routes: Routes = [
         path: 'acoes',
         loadChildren: () =>
           import('../acoes/acoes.module').then((m) => m.AcoesModule),
-      },
-      {
-        path: 'portfolio',
-        loadChildren: () =>
-          import('../portfolio/portfolio.module').then(
-            (m) => m.PortfolioModule
-          ),
       },
       {
         path: '',

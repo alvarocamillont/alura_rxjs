@@ -1,14 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import {
-  PoMenuItem,
-  PoToolbarAction,
-  PoToolbarProfile,
-} from '@po-ui/ng-components';
-import { User } from '../authorization/model/user';
-import { environment } from 'src/environments/environment';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { PoMenuItem, PoToolbarAction, PoToolbarProfile } from '@po-ui/ng-components';
+import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 import { AuthorizationService } from '../authorization/authorization.service';
+import { User } from '../authorization/model/user';
 
 @Component({
   selector: 'app-home',
@@ -70,10 +67,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         label: 'Ações',
         link: '/home/acoes',
-      },
-      {
-        label: 'Portfolio',
-        link: '/home/portfolio',
       },
     ];
     return menu;

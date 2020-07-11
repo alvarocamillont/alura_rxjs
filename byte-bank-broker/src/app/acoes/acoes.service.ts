@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { AcoesAPI } from './modelo/acoes';
+import { Acao } from './modelo/acoes';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,22 @@ export class AcoesService {
   constructor(private httpClient: HttpClient) {}
 
   getAcoes() {
-    return this.httpClient.get<AcoesAPI>('http://localhost:3000/acoes');
+    return this.httpClient
+      .get<any>('http://localhost:3000/acoes')
+      .pipe(
+        map((acoes) =>
+          acoes.sort((acaoA, acaoB) => this.ordenaPorCodigo(acaoB, acaoA))
+        )
+      );
+  }
+
+  private ordenaPorCodigo(acaoA: Acao, acaoB: Acao): number {
+    if (acaoA.codigo < acaoB.codigo) {
+      return -1;
+    }
+    if (acaoA.codigo > acaoB.codigo) {
+      return 1;
+    }
+    return 0;
   }
 }

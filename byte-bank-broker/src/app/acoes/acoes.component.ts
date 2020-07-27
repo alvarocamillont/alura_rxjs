@@ -31,6 +31,8 @@ export class AcoesComponent {
     tap(console.log),
     filter((valor) => valor.length >= 3 || !valor.length),
     tap(console.log),
+    distinctUntilChanged(),
+    tap(console.log),
     switchMap((valorDigitado) => this.acoesService.getAcoes(valorDigitado)),
     tap(console.log)
   );
